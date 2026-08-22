@@ -1,0 +1,10 @@
+PartNumber,Description,Qty,Type,PartType,Material,Mass_kg,TotalMass_kg,RawDimensions,SurfaceTreatment,ProcurementGroup,Supplier,SupplierPartNumber,Revision
+PRJ101_M00,Main Assembly,1,assembly,Manufactured,,0.000,0.000,,,Assembly,,,00
+PRJ101_P001,Base Plate,4,part,Manufactured,AISI 304 (1.4301),1.250,5.000,200x150x10 mm,Zinc Plating (ISO 2081 Fe/Zn 8/A),Laser_Cutting,Vendor_LaserCut,,00
+PRJ101_P002,Support Bracket,2,part,Manufactured,1.0570 (S355J2G3),0.480,0.960,120x80x8 mm,Powder Coating RAL 7035,Sheet_Bending,Vendor_SheetMetal,,01
+PRJ101_MK01,Welded Frame,1,assembly,Manufactured,1.0037 (S235JR),12.300,12.300,3000x80x60x5 mm,Powder Coating RAL 7016,Welded_Structure,Vendor_Welding,,00
+PRJ101_PS003,Modified Stud (turned tip),6,part,ModifiedStandard,AISI 316L (1.4404),0.030,0.180,DIN 933 M12x60,None,Turning_Milling,Vendor_Machining,,00
+DIN 933 M12x60,Hex Bolt M12x60,12,part,Purchased,Steel Grade 8.8,0.045,0.540,,Zinc Plating (ISO 2081 Fe/Zn 8/A),Fasteners_Hardware,Vendor_Fasteners,DIN 933 M12x60,
+SKF 6204-2RS,Ball Bearing 20x47x14,2,part,Purchased,Chrome Steel,0.106,0.212,,,Bearings_Transmission,Vendor_Bearings,6204-2RS,
+PRJ101_P004,Gear Housing,1,part,Manufactured,Aluminium 6082-T6,2.100,2.100,180x120x90 mm,Hard Anodizing 50um,Turning_Milling,Vendor_Machining,,00
+PRJ101_M02,Drive Sub-Assembly,1,assembly,Manufactured,,1.800,1.800,,,Assembly,,,00

@@ -1,0 +1,10 @@
+ProcurementGroup,PartNumber,Description,Qty,Material/Catalog,Finish,Supplier
+Assembly,PRJ101_M00,Main Assembly,1,,, 
+Assembly,PRJ101_M02,Drive Sub-Assembly,1,,,
+Laser_Cutting,PRJ101_P001,Base Plate,4,AISI 304 (1.4301),Zinc Plating (ISO 2081 Fe/Zn 8/A),Vendor_LaserCut
+Sheet_Bending,PRJ101_P002,Support Bracket,2,1.0570 (S355J2G3),Powder Coating RAL 7035,Vendor_SheetMetal
+Welded_Structure,PRJ101_MK01,Welded Frame,1,1.0037 (S235JR),Powder Coating RAL 7016,Vendor_Welding
+Turning_Milling,PRJ101_PS003,Modified Stud (turned tip),6,DIN 933 M12x60,None,Vendor_Machining
+Turning_Milling,PRJ101_P004,Gear Housing,1,Aluminium 6082-T6,Hard Anodizing 50um,Vendor_Machining
+Fasteners_Hardware,DIN 933 M12x60,Hex Bolt M12x60,12,DIN 933 M12x60,Zinc Plating (ISO 2081 Fe/Zn 8/A),Vendor_Fasteners
+Bearings_Transmission,SKF 6204-2RS,Ball Bearing 20x47x14,2,6204-2RS,,Vendor_Bearings

@@ -154,6 +154,9 @@ Emits two CSVs — a full engineering BOM (part number, description, qty, materi
 rolled-up mass in kg, raw size, finish, revision) and a procurement routing sheet grouped by
 sourcing channel.
 
+**Example output** (illustrative, generated with sample data — no SolidWorks needed to inspect them):
+`examples/audit_report.md`, `examples/sample_BOM.csv`, `examples/sample_Procurement.csv`.
+
 ## 5. Testing
 
 The pure logic — naming regexes, the part-code parser and the `audit_component` rules — is
