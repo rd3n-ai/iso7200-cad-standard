@@ -32,7 +32,10 @@ def audit_component(record, lookup_table):
     elif cad.parse_code(code) is None and part_type not in ("Purchased", "Reference"):
         # Standard catalog items (SPECIFICATION 1.1, rule 3) keep their manufacturer
         # part number and are exempt from the project numbering scheme.
-        findings.append((ERROR, "K04", f"File name does not follow [PROJECT]_[TYPE][SEQ] scheme (e.g. PRJ101_P001): {code!r}"))
+        # If PartType is empty the exemption cannot be judged — downgrade to WARNING so
+        # the user is told to classify the part (T04) instead of getting a hard ERROR.
+        sev = ERROR if part_type else WARNING
+        findings.append((sev, "K04", f"File name does not follow [PROJECT]_[TYPE][SEQ] scheme (e.g. PRJ101_P001): {code!r}"))
     if not record.get("Description"):
         findings.append((ERROR, "K02", "Description property is empty (TITLE block and BOM will be blank)"))
     if not record.get("Revision"):

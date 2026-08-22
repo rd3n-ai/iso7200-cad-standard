@@ -154,9 +154,22 @@ Emits two CSVs — a full engineering BOM (part number, description, qty, materi
 rolled-up mass in kg, raw size, finish, revision) and a procurement routing sheet grouped by
 sourcing channel.
 
+## 5. Testing
+
+The pure logic — naming regexes, the part-code parser and the `audit_component` rules — is
+platform-independent and covered by unit tests that run without a SolidWorks session:
+
+```bash
+python -m unittest tests.test_standard -v   # or: python tests/test_standard.py
+```
+
+The SolidWorks COM path (`connect`, `open_readonly`, COM casting) is guarded so the module still
+imports cleanly on any platform; only those COM functions require a live Windows + SolidWorks
+environment. CI runs the unit suite on every push via `.github/workflows/test.yml`.
+
 ---
 
-## 5. Adopting the standard without the scripts
+## 6. Adopting the standard without the scripts
 
 The standard carries on its own. To apply it in any CAD system that supports custom properties:
 
@@ -171,7 +184,7 @@ checking is done by a person rather than a script.
 
 ---
 
-## 6. Contributing & scope
+## 7. Contributing & scope
 
 Issues and pull requests on the **specification** — the property dictionary, the numbering scheme,
 the title block mapping, the diagnostic taxonomy — are genuinely welcome. That is where the value
@@ -182,7 +195,7 @@ without support or a compatibility guarantee across SolidWorks versions.
 
 ---
 
-## 7. License & attribution
+## 8. License & attribution
 
 * **Code** (`scripts/`) — [Apache License 2.0](LICENSE)
 * **Specification** (`SPECIFICATION.md`, `AI_GUIDELINES.md`, `examples/`) — [CC BY 4.0](LICENSE-SPEC)

@@ -14,8 +14,8 @@ description: Machine-readable rulebook and AI agent entry point for CAD metadata
 Any CAD dataset, automated script, or inspection tool interacting with this standard MUST satisfy these non-negotiable rules:
 
 1. **Deterministic Naming:** Two layers are enforced.
-   * *Character layer* (all components): `^[A-Z0-9][A-Z0-9_-]*$`. Prohibited: localized characters, spaces, punctuation (`Ø, #, &, @`).
-   * *Structural layer* (project components only): `^[A-Z0-9][A-Z0-9-]*_(MK|PS|M|P)\d+$`. Standard catalog items (`PartType` = `Purchased` or `Reference`) keep their manufacturer part number and are exempt.
+   * *Character layer* (all components): `^[A-Z0-9][A-Z0-9_-]*$`. Prohibited: localized characters, spaces, punctuation (`Ø, #, &, @`). `-` and `_` are allowed.
+   * *Structural layer* (project components only): `^[A-Z0-9][A-Z0-9-]*_(MK|PS|M|P)\d+$` — the project code admits `-` but **no `_`** (the underscore is the type separator). Standard catalog items (`PartType` = `Purchased` or `Reference`) keep their manufacturer part number and are exempt.
 2. **Model = Single Source of Truth (SSOT):**
    * Technical drawings do NOT store independent copies of part numbers, descriptions, materials, weights, or revisions.
    * Drawing title blocks bind to 3D model properties using `$PRPSHEET:"<Property>"`.

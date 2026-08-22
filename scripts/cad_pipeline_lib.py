@@ -12,16 +12,29 @@ read-only mode and closes only the sessions it initiated.
 import os
 import re
 import csv
-import pythoncom
-import win32com.client
-from win32com.client import gencache
+
+# pywin32 only exists on Windows. Guard the import so the pure functions
+# (parse_code, regex, audit helpers) stay importable and unit-testable on any
+# platform; only the COM path needs a live SolidWorks session.
+try:
+    import pythoncom
+    import win32com.client
+    from win32com.client import gencache
+    _HAS_COM = True
+except ImportError:  # pragma: no cover - exercised on non-Windows
+    pythoncom = None
+    win32com = None
+    gencache = None
+    _HAS_COM = False
 
 # SolidWorks Type Library GUID
 SW_TLB = "{83A33D31-27C5-11CE-BFD4-00400513BB57}"
-try:
-    MOD = gencache.GetModuleForTypelib(SW_TLB, 0, 34, 0)
-except Exception:
-    MOD = None
+MOD = None
+if _HAS_COM:
+    try:
+        MOD = gencache.GetModuleForTypelib(SW_TLB, 0, 34, 0)
+    except Exception:
+        MOD = None
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_LOOKUP_CSV = os.path.join(BASE_DIR, "examples", "lookup_table.csv")
@@ -33,7 +46,9 @@ UNITSYS_CUSTOM, MASS_KG = 4, 3
 
 # Smart part numbering regex: PROJECT_TYPEINDEX (e.g. PRJ101_P001, MOD01_PS003)
 CODE_PATTERN = re.compile(r"^[A-Z0-9][A-Z0-9_-]*$")
-CODE_PARSE = re.compile(r"^(?P<project>[A-Z0-9][A-Z0-9-]*)_(?P<type>MK|PS|M|P)(?P<no>\d+)$", re.I)
+# Case-sensitive: the character layer forbids lowercase (K01), so the parser
+# must not accept it either.
+CODE_PARSE = re.compile(r"^(?P<project>[A-Z0-9][A-Z0-9-]*)_(?P<type>MK|PS|M|P)(?P<no>\d+)$")
 
 TYPE_CODES = {
     "M": "Assembly / Sub-Assembly",
@@ -62,6 +77,8 @@ def cast(obj, iface):
 
 def connect():
     """Attaches to an active CAD session without spawning a new UI instance."""
+    if not _HAS_COM:
+        raise RuntimeError("pywin32 is not available. The SolidWorks pipeline only runs on Windows.")
     o = win32com.client.GetActiveObject("SldWorks.Application")
     return cast(o, "ISldWorks") if MOD else o
 
@@ -194,7 +211,7 @@ def extract_assembly_components(sw, asm_path):
             for field in (
                 "Description", "Revision", "Material", "Weight", "RawDimensions",
                 "SurfaceTreatment", "PartType", "ProcurementGroup", "Supplier",
-                "SupplierPartNumber", "ProjectCode", "DrawnBy", "CheckedBy",
+                "SupplierPartNumber", "DrawnBy", "CheckedBy",
                 "ApprovedBy", "DrawnDate",
             ):
                 resolved, raw_val = get_property(md, cfg, field)

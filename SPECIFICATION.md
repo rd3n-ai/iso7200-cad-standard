@@ -20,7 +20,11 @@ File names serve as the unique, immutable identity of every component in the pro
 [PROJECT_CODE]_[TYPE_CODE][SEQUENCE_NUMBER]
 ```
 
-* **`PROJECT_CODE`**: Alphanumeric project or customer identifier (e.g., `PRJ101`, `MOD02`). Format: `^[A-Z0-9][A-Z0-9-]*$`.
+Two layers are enforced — a **character layer** valid for every file name, and a **structural layer** that parses only project components.
+
+* **Character layer (all file names):** `^[A-Z0-9][A-Z0-9_-]*$` — only uppercase alphanumerics plus `-` and `_`. Applied first; any violation is `K01`.
+* **Structural layer (project components only):** `^[A-Z0-9][A-Z0-9-]*_(MK|PS|M|P)\d+$` — the project code itself admits `-` but **no `_`** (the underscore is the type separator); the type code is one of `MK | PS | M | P`. Applied only when the character layer passes; violations are `K04`.
+* **`PROJECT_CODE`**: Alphanumeric project or customer identifier (e.g., `PRJ101`, `MOD02`), optional hyphens.
 * **`TYPE_CODE`**: Explicit design classification:
   * `M` : Main Assembly or Sub-Assembly (e.g., `PRJ101_M00` for top-level, `PRJ101_M01` for sub-assembly).
   * `MK` : Welded Assembly / Structural Frame (Weldment).
