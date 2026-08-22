@@ -1,0 +1,3 @@
+# Reference implementation dependencies (Windows only).
+# Requires a locally installed and running SolidWorks session.
+pywin32>=306

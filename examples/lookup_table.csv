@@ -1,0 +1,13 @@
+SurfaceTreatment,ProcurementGroup,DefaultSupplier,StandardMaterial
+None,Laser_Cutting,Vendor_LaserCut,AISI 304 (1.4301)
+Zinc Plating (ISO 2081 Fe/Zn 8/A),Turning_Milling,Vendor_Machining,1.0570 (S355J2G3)
+Black Oxide (MIL-DTL-13924),Sheet_Bending,Vendor_SheetMetal,1.0037 (S235JR)
+Hard Anodizing 50um (MIL-A-8625 Type III),Welded_Structure,Vendor_Welding,Aluminium 6082-T6
+Clear Anodizing 15um (MIL-A-8625 Type II),Fasteners_Hardware,Vendor_Fasteners,Aluminium 7075-T6
+Powder Coating RAL 7035 (Light Grey),Pneumatics,Vendor_Pneumatics,POM-C (Acetal Polyacetal)
+Powder Coating RAL 7016 (Anthracite Grey),Motors_Drives,Vendor_Automation,PA6-G (Cast Polyamide)
+Nickel Plating (ISO 4526),Bearings_Transmission,Vendor_Bearings,42CrMo4+QT (1.7225)
+Passivation (ASTM A967),Hydraulics,Vendor_Hydraulics,1.2379 (X153CrMoV12)
+E-Coating (Cataphoresis),Electronics_Sensors,Vendor_Sensors,CuSn8 (Bronze)
+Phosphating (ISO 9717),Raw_Material,Vendor_SteelDistributor,Cu-ETP (Copper ETP)
+QBQ / Salt Bath Nitriding,Tooling_Special,Vendor_Tooling,AISI 316L (1.4404)
